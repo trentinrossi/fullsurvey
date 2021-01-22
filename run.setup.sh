@@ -1,3 +1,6 @@
+echo Setting hosts dependencies
+./hosts.setup.sh
+
 echo Create network dependencies
 docker network create system_network
 

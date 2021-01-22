@@ -14,10 +14,10 @@ services:
       - system_network
 
   nginx:
-    image: nginx
+    image: rodrigotrentinrossi/nginx-gateway
     container_name: nginx
     ports:
-      - "9090:80"
+      - "80:80"
     networks:
       - system_network  
 
@@ -28,8 +28,8 @@ services:
       - ./envs/question-service.env
     networks:
       - system_network
-    ports:
-      - "4001:4001"
+    expose:
+      - "4001"
 
   respondent_service:
     image: rodrigotrentinrossi/respondent-service:latest
@@ -38,8 +38,8 @@ services:
       - ./envs/respondent-service.env
     networks:
       - system_network
-    ports:
-      - "4002:4002"
+    expose:
+      - "4002"
 
 volumes:  
   mongodb-db:
