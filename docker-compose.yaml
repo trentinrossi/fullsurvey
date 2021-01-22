@@ -1,0 +1,50 @@
+version: "3"
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      #- ./database/mongodb:/docker-entrypoint-initdb.d/*.js
+      - "mongodb-db:/data/db"
+    networks:
+      - system_network
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "9090:80"
+    networks:
+      - system_network  
+
+  question_service:
+    image: rodrigotrentinrossi/question-service:latest
+    container_name: question_service
+    env_file:
+      - ./envs/question-service.env
+    networks:
+      - system_network
+    ports:
+      - "4001:4001"
+
+  respondent_service:
+    image: rodrigotrentinrossi/respondent-service:latest
+    container_name: respondent_service
+    env_file:
+      - ./envs/respondent-service.env
+    networks:
+      - system_network
+    ports:
+      - "4002:4002"
+
+volumes:  
+  mongodb-db:
+
+networks:
+  system_network:
+    external:
+      name: system_network
