@@ -13,6 +13,7 @@ sleep 15s
 
 docker restart respondent_service
 docker restart question_service
+docker restart survey_service
 docker restart nginx
 
 sleep 5s

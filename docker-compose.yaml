@@ -29,6 +29,16 @@ services:
     expose:
       - "4002"
 
+  survey_service:
+    image: rodrigotrentinrossi/survey-service:latest
+    container_name: survey_service
+    env_file:
+      - ./envs/survey-service.env
+    networks:
+      - system_network
+    expose:
+      - "4003"
+
 volumes:  
   mongodb-db:
 
